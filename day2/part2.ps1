@@ -32,17 +32,9 @@ ForEach ($password in $passwords) {
 
     $pass = ($password.password.ToCharArray());
     
+    Write-Output ("Password: " + $pass);
 
-    foreach ($pas in $pass) {
-        if ($pas -eq $letter) { $lettercount++;}
-    }
-
-    Write-Output "Password: " $pass;
-
-    Write-Output "Letter Count: " $lettercount;
-
-    Write-Output ( "If (( " + $lettercount + " -ge " + $lowerrange + " ) -and ( " + $lettercount + " -le " + $upperrange + " ))");
-    if (($lettercount -ge $lowerrange) -and ($lettercount -le $upperrange)) {
+    if ((($pass[([int]$lowerrange - 1)]) -eq $letter) -xor (($pass[([int]$upperrange - 1)]) -eq $letter)) {
         $correct+=1;
         Write-Output "CORRECT";
         Write-Output $correct; 
